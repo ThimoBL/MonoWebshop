@@ -32,6 +32,20 @@ export class ProductsService {
       price: 3,
       image: 'https://picsum.photos/200/300',
       size: 'L'
+    }, {
+      id: 4,
+      name: 'Product 4',
+      description: 'Product 4 description',
+      price: 4,
+      image: 'https://picsum.photos/200/300',
+      size: 'XL'
+    }, {
+      id: 5,
+      name: 'Product 5',
+      description: 'Product 5 description',
+      price: 5,
+      image: 'https://picsum.photos/200/300',
+      size: 'XXL'
     }]
   }
 
