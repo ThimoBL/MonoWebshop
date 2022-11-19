@@ -19,7 +19,7 @@
         "assets": [
           "apps/webshop-clientside/src/favicon.ico",
           "apps/webshop-clientside/src/assets",
-          "src/_redirects"
+          "apps/webshop-clientside/src/_redirects"
         ],
         "styles": [
           "node_modules/bootstrap/dist/css/bootstrap.min.css",
