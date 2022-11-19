@@ -1,0 +1,106 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add new product!</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+  </div>
+  <form #form="ngForm" name="form" (ngSubmit)="OnSubmit()" novalidate>
+
+    <div class="modal-body">
+      <div class="mb-3">
+        <label for="name" class="form-label">Product Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [(ngModel)]="product.name"
+          [ngClass]="{'is-invalid': name.invalid && name.touched}"
+          #name="ngModel"
+          placeholder="Name of the product"
+          name="name"
+          required>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger mt-1 py-1">
+          <div *ngIf="name.errors!['required']">
+            Name is required.
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="description">Description</label>
+        <input
+          required
+          id="description"
+          type="text"
+          name="description"
+          class="form-control"
+          #description="ngModel"
+          [(ngModel)]="product.description"
+          [ngClass]="{'is-invalid': description.invalid && description.touched}"
+          placeholder="Describe the product">
+        <div *ngIf="description.invalid && (description.dirty || description.touched)"
+             class="alert alert-danger mt-1 py-1">
+          <div *ngIf="description.errors?.['required']">
+            Description is required.
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="description">Price</label>
+        <div class="input-group">
+          <span class="input-group-text">€ </span>
+          <input
+            id="price"
+            type="number"
+            name="price"
+            class="form-control"
+            #price="ngModel"
+            [(ngModel)]="product.price"
+            placeholder="Product price"
+            [ngClass]="{'is-invalid': price.invalid && price.touched}"
+            required>
+        </div>
+        <div *ngIf="price.invalid && (price.dirty || price.touched)" class="alert alert-danger mt-1 py-1">
+          <div *ngIf="price.errors?.['required']">
+            Price is required.
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="description">Image</label>
+        <div class="input-group">
+          <input
+            id="image"
+            type="file"
+            name="image"
+            class="form-control"
+            #image="ngModel"
+            [(ngModel)]="product.image"
+            placeholder="Product image">
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="description">Size</label>
+        <input
+          id="size"
+          type="text"
+          name="size"
+          class="form-control"
+          #size="ngModel"
+          [(ngModel)]="product.size"
+          placeholder="Product size"
+          [ngClass]="{'is-invalid': size.invalid && size.touched}"
+          required>
+        <div *ngIf="size.invalid && (size.dirty || size.touched)" class="alert alert-danger mt-1 py-1">
+          <div *ngIf="size.errors?.['required']">
+            Size is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary px-5" (click)="modal.dismiss()">Cancel</button>
+      <button type="submit" class="btn btn-success px-5" [disabled]="!form.valid">Save</button>
+    </div>
+  </form>
+</ng-template>
+
+<a class="btn btn-primary rounded-0 mb-2" (click)="ngOnModalOpen(content)">Create new product</a>

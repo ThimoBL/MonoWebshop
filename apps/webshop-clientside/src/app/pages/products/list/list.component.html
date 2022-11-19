@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-lg col-md-6 col-sm-6 py-2" *ngFor="let product of Products">
+    <div class="card rounded-0">
+      <img src="{{product.image}}" class="card-img-top rounded-0 img-responsive" alt="...">
+      <div class="card-body">
+        <div class="d-flex flex-row">
+          <h5 class="card-title me-auto">{{product.name}}</h5>
+          <h5 class="card-title ms-auto">€ {{product.price}}</h5>
+        </div>
+        <p class="card-text">{{product.description}}</p>
+        <p class="card-text">Size: {{product.size}}</p>
+        <div class="d-flex flex-row">
+          <products-details productId="{{product.id}}" class="me-auto"></products-details>
+          <products-update productId="{{product.id}}" class="mx-auto"></products-update>
+          <a class="btn btn-danger ms-auto px-3" (click)="OnDelete(product.id)">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

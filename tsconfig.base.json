@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@mono-webshop/data": ["libs/data/src/index.ts"],
+      "@mono-webshop/products-ui": ["libs/products-ui/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
