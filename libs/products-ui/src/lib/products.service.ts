@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Product} from "@mono-webshop/data";
+import { ManufacturerService } from "./manufacturer.service";
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
@@ -7,6 +8,7 @@ export class ProductsService {
   private readonly products: Product[];
 
   constructor(
+    private readonly manufacturerService: ManufacturerService
     // protected readonly http: HttpClient,
     // public readonly url: string,
     // public readonly endpoint: string
@@ -17,35 +19,40 @@ export class ProductsService {
       description: 'Product 1 description',
       price: 1,
       image: 'https://picsum.photos/200/300',
-      size: 'S'
-    }, {
+      size: 'S',
+      Manufacturer: this.manufacturerService.get(1)
+    } , {
       id: 2,
       name: 'Product 2',
       description: 'Product 2 description',
       price: 2,
       image: 'https://picsum.photos/200/300',
-      size: 'M'
+      size: 'M',
+      Manufacturer: this.manufacturerService.get(2)
     }, {
       id: 3,
       name: 'Product 3',
       description: 'Product 3 description',
       price: 3,
       image: 'https://picsum.photos/200/300',
-      size: 'L'
+      size: 'L',
+      Manufacturer: this.manufacturerService.get(3)
     }, {
       id: 4,
       name: 'Product 4',
       description: 'Product 4 description',
       price: 4,
       image: 'https://picsum.photos/200/300',
-      size: 'XL'
+      size: 'XL',
+      Manufacturer: this.manufacturerService.get(4)
     }, {
       id: 5,
       name: 'Product 5',
       description: 'Product 5 description',
       price: 5,
       image: 'https://picsum.photos/200/300',
-      size: 'XXL'
+      size: 'XXL',
+      Manufacturer: this.manufacturerService.get(5)
     }]
   }
 
@@ -63,8 +70,8 @@ export class ProductsService {
     return product;
   }
 
-  public update(product: Product): Product {
-    const index = this.products.findIndex((p => p.id === product.id));
+  public update(id: number, product: Product): Product {
+    const index = this.products.findIndex((p => p.id === id));
     this.products[index] = product;
     return product;
   }

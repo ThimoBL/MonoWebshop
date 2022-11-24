@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css'],
 })
-export class ListComponent implements OnInit {
+export class ListProductComponent implements OnInit {
   Products: Product[] | undefined;
 
   constructor(

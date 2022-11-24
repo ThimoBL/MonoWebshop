@@ -1,0 +1,18 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add new product!</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+  </div>
+  <form #form="ngForm" name="form" (ngSubmit)="OnSubmit()" novalidate>
+
+    <div class="model-body">
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary px-5" (click)="modal.dismiss()">Cancel</button>
+      <button type="submit" class="btn btn-success px-5" [disabled]="!form.valid">Save</button>
+    </div>
+  </form>
+</ng-template>
+
+<a class="btn btn-primary rounded-0 mb-2" (click)="ngOnModalOpen(content)">Create new manufacturer</a>

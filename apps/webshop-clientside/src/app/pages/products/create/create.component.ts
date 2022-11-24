@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
   providers: [NgbModalConfig, NgbModal]
 })
 
-export class CreateComponent implements OnInit {
+export class CreateProductComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
@@ -26,7 +26,15 @@ export class CreateComponent implements OnInit {
     description: '',
     price: 0,
     image: '',
-    size: ''
+    size: '',
+    Manufacturer: {
+      id: 0,
+      name: '',
+      city: '',
+      country: '',
+      email: '',
+      phone: ''
+    }
   }
 
   ngOnInit(): void {}

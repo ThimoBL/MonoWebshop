@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
   templateUrl: './update.component.html',
   styleUrls: ['./update.component.css'],
 })
-export class UpdateComponent implements OnInit {
+export class UpdateProductComponent implements OnInit {
 
   @Input()
   productId: string | undefined;
@@ -45,7 +45,7 @@ export class UpdateComponent implements OnInit {
   }
 
   OnSubmit(): void {
-    this.productsService.update(this.product);
+    this.productsService.update(this.product.id, this.product);
 
     this.ngOnModalClose();
 

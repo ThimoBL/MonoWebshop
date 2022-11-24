@@ -9,7 +9,7 @@ import {ProductsService} from "@mono-webshop/products-ui";
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css'],
 })
-export class DetailsComponent implements OnInit {
+export class DetailsProductComponent implements OnInit {
 
   @Input()
   productId: string | undefined;
