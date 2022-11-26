@@ -7,5 +7,5 @@ export interface Product {
   price: number;
   image: string;
   size: string;
-  Manufacturer: Manufacturer;
+  manufacturer: Manufacturer;
 }

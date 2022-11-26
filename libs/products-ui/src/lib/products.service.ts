@@ -20,7 +20,7 @@ export class ProductsService {
       price: 1,
       image: 'https://picsum.photos/200/300',
       size: 'S',
-      Manufacturer: this.manufacturerService.get(1)
+      manufacturer: this.manufacturerService.get(1)
     } , {
       id: 2,
       name: 'Product 2',
@@ -28,7 +28,7 @@ export class ProductsService {
       price: 2,
       image: 'https://picsum.photos/200/300',
       size: 'M',
-      Manufacturer: this.manufacturerService.get(2)
+      manufacturer: this.manufacturerService.get(2)
     }, {
       id: 3,
       name: 'Product 3',
@@ -36,7 +36,7 @@ export class ProductsService {
       price: 3,
       image: 'https://picsum.photos/200/300',
       size: 'L',
-      Manufacturer: this.manufacturerService.get(3)
+      manufacturer: this.manufacturerService.get(3)
     }, {
       id: 4,
       name: 'Product 4',
@@ -44,7 +44,7 @@ export class ProductsService {
       price: 4,
       image: 'https://picsum.photos/200/300',
       size: 'XL',
-      Manufacturer: this.manufacturerService.get(4)
+      manufacturer: this.manufacturerService.get(4)
     }, {
       id: 5,
       name: 'Product 5',
@@ -52,7 +52,7 @@ export class ProductsService {
       price: 5,
       image: 'https://picsum.photos/200/300',
       size: 'XXL',
-      Manufacturer: this.manufacturerService.get(5)
+      manufacturer: this.manufacturerService.get(5)
     }]
   }
 

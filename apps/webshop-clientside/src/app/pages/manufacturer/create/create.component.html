@@ -5,8 +5,92 @@
   </div>
   <form #form="ngForm" name="form" (ngSubmit)="OnSubmit()" novalidate>
 
-    <div class="model-body">
-
+    <div class="modal-body">
+      <div class="mb-3">
+        <label for="name" class="form-label">Manufacturer Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          [(ngModel)]="manufacturer.name"
+          [ngClass]="{'is-invalid': name.invalid && name.touched}"
+          #name="ngModel"
+          required>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger mt-1 py-1">
+          <div *ngIf="name.errors!['required']">
+            Name is required.
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="city" class="form-label">City</label>
+        <input
+          type="text"
+          class="form-control"
+          id="city"
+          name="city"
+          [(ngModel)]="manufacturer.city"
+          [ngClass]="{'is-invalid': city.invalid && city.touched}"
+          #city="ngModel"
+          required>
+        <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger mt-1 py-1">
+          <div *ngIf="city.errors!['required']">
+            City is required.
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="country" class="form-label">Country</label>
+        <input
+          type="text"
+          class="form-control"
+          id="country"
+          name="country"
+          [(ngModel)]="manufacturer.country"
+          [ngClass]="{'is-invalid': country.invalid && country.touched}"
+          #country="ngModel"
+          required>
+        <div *ngIf="country.invalid && (country.dirty || country.touched)" class="alert alert-danger mt-1 py-1">
+          <div *ngIf="country.errors!['required']">
+            Country is required.
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="phone" class="form-label">E-Mail address</label>
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          name="email"
+          [(ngModel)]="manufacturer.email"
+          [ngClass]="{'is-invalid': email.invalid && email.touched}"
+          #email="ngModel"
+          required>
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger mt-1 py-1">
+          <div *ngIf="email.errors!['required']">
+            Email is required.
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="phone" class="form-label">Phone</label>
+        <input
+          type="text"
+          class="form-control"
+          id="phone"
+          name="phone"
+          [(ngModel)]="manufacturer.phone"
+          [ngClass]="{'is-invalid': phone.invalid && phone.touched}"
+          #phone="ngModel"
+          required>
+        <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger mt-1 py-1">
+          <div *ngIf="phone.errors!['required']">
+            Phone is required.
+          </div>
+        </div>
+      </div>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary px-5" (click)="modal.dismiss()">Cancel</button>

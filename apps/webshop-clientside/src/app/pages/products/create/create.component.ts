@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
 import {ProductsService} from "@mono-webshop/products-ui";
-import {Product} from "@mono-webshop/data";
+import {Manufacturer, Product} from "@mono-webshop/data";
 import Swal from 'sweetalert2';
 import {Router} from "@angular/router";
+import {ManufacturerService} from "../../../../../../../libs/products-ui/src/lib/manufacturer.service";
 
 @Component({
   selector: 'products-create',
@@ -13,11 +14,13 @@ import {Router} from "@angular/router";
 })
 
 export class CreateProductComponent implements OnInit {
+  selectedManufacturer: string | null;
 
   constructor(
     private modalService: NgbModal,
-    private router: Router,
-    private productsService: ProductsService) {
+    private productsService: ProductsService,
+    private manufacturerService: ManufacturerService) {
+    this.selectedManufacturer = null;
   }
 
   product: Product = {
@@ -27,17 +30,14 @@ export class CreateProductComponent implements OnInit {
     price: 0,
     image: '',
     size: '',
-    Manufacturer: {
-      id: 0,
-      name: '',
-      city: '',
-      country: '',
-      email: '',
-      phone: ''
-    }
+    manufacturer: {} as Manufacturer
   }
 
-  ngOnInit(): void {}
+  manufacturers: Manufacturer[] | undefined;
+
+  ngOnInit(): void {
+    this.manufacturers = this.manufacturerService.list();
+  }
 
   ngOnModalOpen(content: any): void {
     this.modalService.open(content);
@@ -57,7 +57,5 @@ export class CreateProductComponent implements OnInit {
       'Product successfully created',
       'success'
     )
-
-    this.router.navigate([".."]);
   }
 }

@@ -1,0 +1,9 @@
+.clickable {
+  cursor: pointer;
+}
+
+.icon {
+  color: black;
+  height: 20px;
+  width: 20px;
+}
