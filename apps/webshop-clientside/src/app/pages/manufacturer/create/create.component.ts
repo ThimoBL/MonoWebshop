@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {Manufacturer} from "@mono-webshop/data";
+import {ManufacturerService} from "../../../../../../../libs/products-ui/src/lib/manufacturer.service";
+import Swal from "sweetalert2";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'manufacturer-create',
@@ -7,8 +11,21 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ['./create.component.css'],
 })
 export class CreateManufacturerComponent implements OnInit {
-  constructor(private modalService: NgbModal) {
+  constructor(
+    private router: Router,
+    private modalService: NgbModal,
+    private manufacturerService: ManufacturerService
+  ) {
   }
+
+  manufacturer: Manufacturer = {
+    id: 0,
+    name: '',
+    city: '',
+    country: '',
+    email: '',
+    phone: ''
+  };
 
   ngOnInit(): void {
   }
@@ -22,5 +39,14 @@ export class CreateManufacturerComponent implements OnInit {
   }
 
   OnSubmit(): void {
+    this.manufacturerService.create(this.manufacturer);
+
+    this.ngOnModalClose();
+
+    Swal.fire(
+      'Success',
+      'Manufacturer successfully created',
+      'success'
+    )
   }
 }

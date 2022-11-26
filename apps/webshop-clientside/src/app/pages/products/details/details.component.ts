@@ -3,6 +3,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Product} from "@mono-webshop/data";
 import {ProductsService} from "@mono-webshop/products-ui";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'products-details',
@@ -35,7 +36,11 @@ export class DetailsProductComponent implements OnInit {
 
       this.product = this.productsService.get(prodId);
     } else {
-      this.router.navigate(['..']);
+      Swal.fire(
+        'Not Found!',
+        'The manufacturer has not been found!',
+        'error'
+      );
     }
   }
 

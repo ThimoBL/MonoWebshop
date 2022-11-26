@@ -18,7 +18,6 @@ export class UpdateProductComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    private route: ActivatedRoute,
     private router: Router,
     private productsService: ProductsService
   ) {
@@ -36,7 +35,11 @@ export class UpdateProductComponent implements OnInit {
 
       this.product = this.productsService.get(prodId);
     } else {
-      this.router.navigate(['..']);
+      Swal.fire(
+        'Not Found!',
+        'The manufacturer has not been found!',
+        'error'
+      );
     }
   }
 
@@ -51,11 +54,9 @@ export class UpdateProductComponent implements OnInit {
 
     Swal.fire(
       'Success',
-      'Product successfully created',
+      'Product successfully updated',
       'success'
     )
-
-    this.router.navigate(['..']);
   }
 
   ngOnModalOpen(content: any): void {
