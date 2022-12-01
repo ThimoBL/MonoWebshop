@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Manufacturer } from 'libs/data/src/lib/Manufacturer.interface';
-import {ManufacturerService} from "../../../../../../../libs/products-ui/src/lib/manufacturer.service";
+import {ManufacturerService} from "@mono-webshop/products-ui";
 import Swal from "sweetalert2";
+import {Manufacturer} from "@mono-webshop/domain";
 
 
 @Component({

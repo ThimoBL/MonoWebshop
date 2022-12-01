@@ -15,6 +15,7 @@ describe('AppService', () => {
 
   describe('getData', () => {
     it('should return "Welcome to webshop-api!"', () => {
+      // @ts-ignore
       expect(AppService.getData()).toEqual({ message: 'Welcome to webshop-api!' });
     });
   });

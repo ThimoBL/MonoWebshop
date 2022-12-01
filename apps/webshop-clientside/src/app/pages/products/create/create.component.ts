@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
 import {ProductsService} from "@mono-webshop/products-ui";
-import {Manufacturer, Product} from "@mono-webshop/data";
+import {Manufacturer, Product} from "@mono-webshop/domain";
 import Swal from 'sweetalert2';
-import {Router} from "@angular/router";
-import {ManufacturerService} from "../../../../../../../libs/products-ui/src/lib/manufacturer.service";
+import {ManufacturerService} from "@mono-webshop/products-ui";
 
 @Component({
   selector: 'products-create',

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {Manufacturer} from "@mono-webshop/data";
-import {ManufacturerService} from "../../../../../../../libs/products-ui/src/lib/manufacturer.service";
+import {Manufacturer} from "@mono-webshop/domain";
+import {ManufacturerService} from "@mono-webshop/products-ui";
 import Swal from "sweetalert2";
 import {Router} from "@angular/router";
 

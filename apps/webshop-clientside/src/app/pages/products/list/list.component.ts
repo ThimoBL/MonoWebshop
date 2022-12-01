@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductsService} from "@mono-webshop/products-ui";
-import {Product} from "@mono-webshop/data";
+import {Product} from "@mono-webshop/domain";
 import Swal from "sweetalert2";
 
 @Component({
