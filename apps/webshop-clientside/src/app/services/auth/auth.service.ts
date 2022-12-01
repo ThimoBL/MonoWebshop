@@ -1,7 +1,7 @@
-import {Injectable} from "@angular/core";
-import {UserService} from "./user.service";
-import {User} from "@mono-webshop/domain";
+import { Injectable } from '@angular/core';
 import {BehaviorSubject} from "rxjs";
+import {User} from "@mono-webshop/domain";
+import {UserService} from "../user/user.service";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

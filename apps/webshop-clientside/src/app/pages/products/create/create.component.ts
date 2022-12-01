@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
-import {ProductsService} from "@mono-webshop/products-ui";
 import {Manufacturer, Product} from "@mono-webshop/domain";
 import Swal from 'sweetalert2';
-import {ManufacturerService} from "@mono-webshop/products-ui";
+import {ManufacturerService} from "../../../services/manufacturer/manufacturer.service";
+import {ProductService} from "../../../services/product/product.service";
 
 @Component({
   selector: 'products-create',
@@ -17,8 +17,10 @@ export class CreateProductComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    private productsService: ProductsService,
-    private manufacturerService: ManufacturerService) {
+    private productsService: ProductService,
+    private manufacturerService: ManufacturerService
+    )
+  {
     this.selectedManufacturer = null;
   }
 

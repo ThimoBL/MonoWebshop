@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {ManufacturerService} from "@mono-webshop/products-ui";
 import {Manufacturer} from "@mono-webshop/domain";
 import Swal from "sweetalert2";
+import {ManufacturerService} from "../../../services/manufacturer/manufacturer.service";
 
 @Component({
   selector: 'manufacturer-details',

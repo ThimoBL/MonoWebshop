@@ -2,8 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Product} from "@mono-webshop/domain";
-import {ProductsService} from "@mono-webshop/products-ui";
 import Swal from "sweetalert2";
+import {ProductService} from "../../../services/product/product.service";
 
 @Component({
   selector: 'products-details',
@@ -20,7 +20,7 @@ export class DetailsProductComponent implements OnInit {
     private modalService: NgbModal,
     private route: ActivatedRoute,
     private router: Router,
-    private productsService: ProductsService
+    private productsService: ProductService
   ) {
     // this is for routerLink on same component when only queryParameter changes
     this.router.routeReuseStrategy.shouldReuseRoute = function () {

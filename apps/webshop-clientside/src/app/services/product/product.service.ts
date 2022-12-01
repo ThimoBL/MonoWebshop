@@ -1,10 +1,9 @@
 import {Injectable} from "@angular/core";
 import {Product} from "@mono-webshop/domain";
-import { ManufacturerService } from "./manufacturer.service";
+import {ManufacturerService} from "../manufacturer/manufacturer.service";
 
 @Injectable({ providedIn: 'root' })
-export class ProductsService {
-
+export class ProductService {
   private readonly products: Product[];
 
   constructor(
@@ -85,3 +84,4 @@ export class ProductsService {
   //   return this.http.get<Product[]>('http://localhost:3000/products');
   // }
 }
+

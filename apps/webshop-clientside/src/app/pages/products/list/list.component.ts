@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductsService} from "@mono-webshop/products-ui";
 import {Product} from "@mono-webshop/domain";
 import Swal from "sweetalert2";
+import {ProductService} from "../../../services/product/product.service";
 
 @Component({
   selector: 'products-list',
@@ -12,7 +12,7 @@ export class ListProductComponent implements OnInit {
   Products: Product[] | undefined;
 
   constructor(
-    private productsService: ProductsService
+    private productsService: ProductService
   ) {}
 
   ngOnInit(): void {

@@ -19,6 +19,10 @@ import { ListManufacturerComponent } from './pages/manufacturer/list/list.compon
 import { UpdateManufacturerComponent } from './pages/manufacturer/update/update.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
+import { ManufacturerService } from './services/manufacturer/manufacturer.service';
+import { UserService } from './services/user/user.service';
+import { ProductService } from './services/product/product.service';
+import { AuthService } from './services/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,7 @@ import { RegisterComponent } from './pages/auth/register/register.component';
     RegisterComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
-  providers: [],
+  providers: [ManufacturerService, UserService, ProductService, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

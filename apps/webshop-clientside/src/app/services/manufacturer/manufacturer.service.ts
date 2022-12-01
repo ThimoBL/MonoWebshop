@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Manufacturer} from "@mono-webshop/domain";
 
-
 @Injectable({ providedIn: 'root' })
 export class ManufacturerService {
 
@@ -76,3 +75,4 @@ export class ManufacturerService {
   }
 
 }
+

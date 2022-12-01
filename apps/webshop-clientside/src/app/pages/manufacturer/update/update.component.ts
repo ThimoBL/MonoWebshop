@@ -2,8 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {Manufacturer} from "@mono-webshop/domain";
 import Swal from "sweetalert2";
-import {ManufacturerService} from "@mono-webshop/products-ui";
 import {Router} from "@angular/router";
+import {ManufacturerService} from "../../../services/manufacturer/manufacturer.service";
 
 @Component({
   selector: 'manufacturer-update',
