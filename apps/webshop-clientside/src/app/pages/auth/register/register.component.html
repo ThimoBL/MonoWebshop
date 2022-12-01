@@ -1,0 +1,112 @@
+<div class="mx-auto w-75 shadow p-3">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Register</h4>
+    </div>
+    <hr>
+    <form #form="ngForm" name="form" (ngSubmit)="OnSubmit()" novalidate>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="text" class="form-control" id="email" name="email" [(ngModel)]="user.email" #email="ngModel"
+                 required>
+          <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger mt-1 py-1">
+            <div *ngIf="email.errors!['required']">
+              Email is required.
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password"
+                 #password="ngModel" required>
+          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger mt-1 py-1">
+            <div *ngIf="password.errors!['required']">
+              Password is required.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md">
+            <div class="mb-3">
+              <label for="firstName" class="form-label">First name</label>
+              <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="user.firstName"
+                     #firstName="ngModel" required>
+              <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger mt-1 py-1">
+                <div *ngIf="firstName.errors!['required']">
+                  First name is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Last name</label>
+              <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="user.lastName"
+                     #lastName="ngModel" required>
+              <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger mt-1 py-1">
+                <div *ngIf="lastName.errors!['required']">
+                  Last name is required.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">
+            <div class="mb-3">
+              <label for="address" class="form-label">Address</label>
+              <input type="text" class="form-control" id="address" name="address" [(ngModel)]="user.address"
+                     #address="ngModel"
+                     required>
+              <div *ngIf="address.invalid && (address.dirty || address.touched)" class="alert alert-danger mt-1 py-1">
+                <div *ngIf="address.errors!['required']">
+                  Address is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="mb-3">
+              <label for="city" class="form-label">City</label>
+              <input type="text" class="form-control" id="city" name="city" [(ngModel)]="user.city" #city="ngModel"
+                     required>
+              <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger mt-1 py-1">
+                <div *ngIf="city.errors!['required']">
+                  City is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="mb-3">
+              <label for="zipCode" class="form-label">Zip Code</label>
+              <input type="text" class="form-control" id="zipCode" name="zipCode" [(ngModel)]="user.zipCode"
+                     #zipCode="ngModel"
+                     required>
+              <div *ngIf="zipCode.invalid && (zipCode.dirty || zipCode.touched)" class="alert alert-danger mt-1 py-1">
+                <div *ngIf="zipCode.errors!['required']">
+                  Zip Code is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone number</label>
+            <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="user.phone" #phone="ngModel"
+                   required>
+            <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger mt-1 py-1">
+              <div *ngIf="phone.errors!['required']">
+                Phone number is required.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary px-5">Register</button>
+      </div>
+    </form>
+  </div>
+</div>

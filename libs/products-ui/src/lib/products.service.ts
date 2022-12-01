@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Product} from "@mono-webshop/data";
+import {Product} from "@mono-webshop/domain";
 import { ManufacturerService } from "./manufacturer.service";
 
 @Injectable({ providedIn: 'root' })

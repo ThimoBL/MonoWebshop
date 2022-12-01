@@ -1,8 +1,6 @@
-import {Prop, Schema} from "@nestjs/mongoose";
+import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
 import { v4 as uuid } from 'uuid';
-import { Document, Schema as MongooseSchema } from 'mongoose';
-
-import {Product} from "./product.schema";
+import { Document } from 'mongoose';
 
 export type ManufacturerDocument = Manufacturer & Document;
 
@@ -19,11 +17,6 @@ export class Manufacturer {
 
   @Prop()
   image: string;
-
-  @Prop({
-    default: [],
-    type: [MongooseSchema.Types.ObjectId],
-    ref: 'Product',
-  })
-  products: Product[];
 }
+
+export const ManufacturerSchema = SchemaFactory.createForClass(Manufacturer);

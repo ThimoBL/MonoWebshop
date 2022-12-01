@@ -7,6 +7,8 @@ import {AboutComponent} from "./pages/about/about.component";
 import {ManufacturerComponent} from "./pages/manufacturer/manufacturer.component";
 import {DetailsManufacturerComponent} from "./pages/manufacturer/details/details.component";
 import {UpdateManufacturerComponent} from "./pages/manufacturer/update/update.component";
+import {LoginComponent} from "./pages/auth/login/login.component";
+import {RegisterComponent} from "./pages/auth/register/register.component";
 
 const routes: Routes = [
   {path: 'products', component: ProductsComponent, children: [
@@ -21,7 +23,9 @@ const routes: Routes = [
       {path: 'create', redirectTo: '', pathMatch: 'full'},
     ]
   },
-  {path: 'about', pathMatch: 'full', component: AboutComponent}
+  {path: 'about', pathMatch: 'full', component: AboutComponent},
+  {path: 'login', pathMatch: 'full', component: LoginComponent},
+  {path: 'register', pathMatch: 'full', component: RegisterComponent},
 ];
 
 @NgModule({
