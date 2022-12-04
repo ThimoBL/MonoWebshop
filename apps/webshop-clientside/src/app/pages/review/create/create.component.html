@@ -1,0 +1,85 @@
+<div class="d-flex flex-row">
+  <strong class="me-auto">Reviews:</strong>
+  <button type="button"
+          (click)="collapse.toggle()"
+          [attr.aria-expanded]="!isCollapsed"
+          aria-controls="collapseExample"
+          class="btn btn-sm btn-outline-">
+    <svg class="ms-auto icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+      <path
+        d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
+    </svg>
+    Add a review
+  </button>
+</div>
+<div class="modal-body" #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+  <form #form="ngForm" name="form" (ngSubmit)="OnSubmit(form)" novalidate>
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        name="title"
+        [(ngModel)]="review.title"
+        placeholder="Enter review title"
+        [ngClass]="{'is-invalid': title.invalid && title.touched}"
+        #title="ngModel"
+        required>
+      <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert alert-danger mt-1 py-1">
+        <div *ngIf="title.errors!['required']">
+          Title is required.
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="text" class="form-label">Description</label>
+      <input
+        class="form-control"
+        id="text"
+        placeholder="Enter review text"
+        name="description"
+        [(ngModel)]="review.description"
+        [ngClass]="{'is-invalid': description.invalid && description.touched}"
+        #description="ngModel"
+        required>
+      <div *ngIf="description.invalid && (description.dirty || description.touched)"
+           class="alert alert-danger mt-1 py-1">
+        <div *ngIf="description.errors!['required']">
+          Text is required.
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="rating" class="form-label">Rating: (Click on stars)</label>
+      <br>
+      <ngb-rating class="icon" [max]="5" [(rate)]="currentRate" style="font-size: 2rem"></ngb-rating>
+      <input
+        type="number"
+        class="form-control"
+        id="rating"
+        name="rating"
+        [valueAsNumber]="currentRate"
+        [(ngModel)]="review.rating"
+        placeholder="Enter review rating"
+        [ngClass]="{'is-invalid': rating.invalid && rating.touched}"
+        #rating="ngModel"
+        required
+        min="1"
+        max="5"
+        disabled>
+      <div *ngIf="rating.invalid && (rating.dirty || rating.touched)" class="alert alert-danger mt-1 py-1">
+        <div *ngIf="rating.errors!['min']">
+          Rating must be between 1 and 5.
+        </div>
+        <div *ngIf="rating.errors!['required']">
+          Rating is required.
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-row">
+      <button type="button" class="btn btn-sm btn-secondary ms-auto mx-1" (click)="collapse.toggle()">Cancel</button>
+      <button type="submit" class="btn btn-sm btn-success mx-1" [disabled]="!form.valid">Save</button>
+    </div>
+  </form>
+</div>
