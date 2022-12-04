@@ -19,7 +19,9 @@ export class RegisterComponent implements OnInit {
     zipCode: '',
     country: '',
     phone: '',
-    role: Role.User
+    role: Role.User,
+    reviews: [],
+    orders: []
   }
 
   constructor() {}

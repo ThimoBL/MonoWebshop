@@ -8,7 +8,7 @@ import {ProductService} from "../../../services/product/product.service";
 @Component({
   selector: 'products-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.css'],
+  styleUrls: ['./details.component.css', '../products.component.css'],
 })
 export class DetailsProductComponent implements OnInit {
 

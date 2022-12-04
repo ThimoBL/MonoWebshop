@@ -10,7 +10,7 @@ import { ListProductComponent } from './pages/products/list/list.component';
 import { CreateProductComponent } from './pages/products/create/create.component';
 import { DetailsProductComponent } from './pages/products/details/details.component';
 import { UpdateProductComponent } from './pages/products/update/update.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AboutComponent } from './pages/about/about.component';
 import { ManufacturerComponent } from './pages/manufacturer/manufacturer.component';
 import { CreateManufacturerComponent } from './pages/manufacturer/create/create.component';
@@ -23,6 +23,10 @@ import { ManufacturerService } from './services/manufacturer/manufacturer.servic
 import { UserService } from './services/user/user.service';
 import { ProductService } from './services/product/product.service';
 import { AuthService } from './services/auth/auth.service';
+import { ReviewComponent } from './pages/review/review.component';
+import { ReviewService } from './services/review/review.service';
+import { OrderService } from './services/order/order.service';
+import { CreateComponent } from './pages/review/create/create.component';
 
 @NgModule({
   declarations: [
@@ -41,9 +45,18 @@ import { AuthService } from './services/auth/auth.service';
     UpdateManufacturerComponent,
     LoginComponent,
     RegisterComponent,
+    ReviewComponent,
+    CreateComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
-  providers: [ManufacturerService, UserService, ProductService, AuthService],
+  imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
+  providers: [
+    ManufacturerService,
+    UserService,
+    ProductService,
+    AuthService,
+    ReviewService,
+    OrderService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

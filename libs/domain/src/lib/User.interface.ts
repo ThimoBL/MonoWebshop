@@ -1,4 +1,6 @@
 import {Role} from "./Role.enum";
+import {Review} from "./Review.interface";
+import {Order} from "./Order.interface";
 
 export interface User {
   id: number;
@@ -12,4 +14,6 @@ export interface User {
   country: string;
   phone: string;
   role: Role;
+  reviews: Review[] | null;
+  orders: Order[] | null;
 }

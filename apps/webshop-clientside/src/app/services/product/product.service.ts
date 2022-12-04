@@ -1,13 +1,15 @@
 import {Injectable} from "@angular/core";
 import {Product} from "@mono-webshop/domain";
 import {ManufacturerService} from "../manufacturer/manufacturer.service";
+import {ReviewService} from "../review/review.service";
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
   private readonly products: Product[];
 
   constructor(
-    private readonly manufacturerService: ManufacturerService
+    private readonly manufacturerService: ManufacturerService,
+    private readonly reviewService: ReviewService
     // protected readonly http: HttpClient,
     // public readonly url: string,
     // public readonly endpoint: string
@@ -19,7 +21,8 @@ export class ProductService {
       price: 1,
       image: 'https://picsum.photos/200/300',
       size: 'S',
-      manufacturer: this.manufacturerService.get(1)
+      manufacturer: this.manufacturerService.get(1),
+      reviews: this.reviewService.list()
     } , {
       id: 2,
       name: 'Product 2',
@@ -27,7 +30,8 @@ export class ProductService {
       price: 2,
       image: 'https://picsum.photos/200/300',
       size: 'M',
-      manufacturer: this.manufacturerService.get(2)
+      manufacturer: this.manufacturerService.get(2),
+      reviews: this.reviewService.list()
     }, {
       id: 3,
       name: 'Product 3',
@@ -35,7 +39,8 @@ export class ProductService {
       price: 3,
       image: 'https://picsum.photos/200/300',
       size: 'L',
-      manufacturer: this.manufacturerService.get(3)
+      manufacturer: this.manufacturerService.get(3),
+      reviews: this.reviewService.list()
     }, {
       id: 4,
       name: 'Product 4',
@@ -43,7 +48,8 @@ export class ProductService {
       price: 4,
       image: 'https://picsum.photos/200/300',
       size: 'XL',
-      manufacturer: this.manufacturerService.get(4)
+      manufacturer: this.manufacturerService.get(4),
+      reviews: this.reviewService.list()
     }, {
       id: 5,
       name: 'Product 5',
@@ -51,7 +57,8 @@ export class ProductService {
       price: 5,
       image: 'https://picsum.photos/200/300',
       size: 'XXL',
-      manufacturer: this.manufacturerService.get(5)
+      manufacturer: this.manufacturerService.get(5),
+      reviews: this.reviewService.list()
     }]
   }
 

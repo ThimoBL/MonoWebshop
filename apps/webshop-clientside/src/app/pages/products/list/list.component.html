@@ -9,6 +9,11 @@
         </div>
         <p class="card-text">{{product.description}}</p>
         <p class="card-text">Size: {{product.size}}</p>
+        <p class="card-text">
+          <ngb-rating class="stars" [rate]="avgRating(product.reviews)" [max]="5" [readonly]="true"></ngb-rating>
+          <br>
+          Rating: {{avgRating(product.reviews) | number:'1.1-1'}} ({{product.reviews.length}})
+        </p>
         <div class="d-flex flex-row">
           <products-details productId="{{product.id}}" class="me-auto"></products-details>
           <products-update productId="{{product.id}}" class="mx-auto"></products-update>

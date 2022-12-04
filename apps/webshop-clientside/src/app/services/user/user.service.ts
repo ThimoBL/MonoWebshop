@@ -17,7 +17,9 @@ export class UserService {
       zipCode: '1234AB',
       country: 'country',
       phone: '0612345678',
-      role: Role.Admin
+      role: Role.Admin,
+      reviews: [],
+      orders: []
     }, {
       id: 2,
       email: 'example2@gmail.com',
@@ -29,7 +31,9 @@ export class UserService {
       zipCode: '1234AB',
       country: 'country',
       phone: '0612345678',
-      role: Role.User
+      role: Role.User,
+      reviews: [],
+      orders: []
     }];
   }
 

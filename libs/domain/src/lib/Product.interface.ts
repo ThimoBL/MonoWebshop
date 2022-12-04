@@ -1,4 +1,5 @@
 import { Manufacturer } from "./Manufacturer.interface";
+import {Review} from "./Review.interface";
 
 export interface Product {
   id: number;
@@ -8,4 +9,5 @@ export interface Product {
   image: string;
   size: string;
   manufacturer: Manufacturer;
+  reviews: Review[];
 }

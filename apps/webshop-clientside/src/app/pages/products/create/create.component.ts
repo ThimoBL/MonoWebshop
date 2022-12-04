@@ -31,7 +31,8 @@ export class CreateProductComponent implements OnInit {
     price: 0,
     image: '',
     size: '',
-    manufacturer: {} as Manufacturer
+    manufacturer: {} as Manufacturer,
+    reviews: []
   }
 
   manufacturers: Manufacturer[] | undefined;
