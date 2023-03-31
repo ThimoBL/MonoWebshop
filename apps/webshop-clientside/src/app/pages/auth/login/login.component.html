@@ -7,17 +7,23 @@
     <form #form="ngForm" name="form" (ngSubmit)="OnSubmit()" novalidate>
       <div class="modal-body">
         <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="text" class="form-control" id="email" name="email" [(ngModel)]="email" required>
-          <div *ngIf="form.submitted && form.controls['email'].errors!['required']" class="text-danger">Email is
-            required
+          <label for="username" class="form-label">Email</label>
+          <input type="text" class="form-control" id="username" name="username" [(ngModel)]="login.username" #username="ngModel"
+                 required>
+          <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger">
+            <div *ngIf="username.errors!['required']">
+              Email is required.
+            </div>
           </div>
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password" required>
-          <div *ngIf="form.submitted && form.controls['password'].errors!['required']" class="text-danger">Password is
-            required
+          <input type="password" class="form-control" id="password" name="password" [(ngModel)]="login.password"
+                 #password="ngModel" required>
+          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger mt-1 py-1">
+            <div *ngIf="password.errors!['required']">
+              Password is required.
+            </div>
           </div>
           <div id="passwordHelpBlock" class="form-text">
             Don't have an account yet? <a routerLink="/register">Register</a>

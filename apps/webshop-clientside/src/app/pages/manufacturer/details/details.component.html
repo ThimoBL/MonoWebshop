@@ -1,10 +1,10 @@
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">{{manufacturer.name}} details</h4>
+    <h4 class="modal-title" id="modal-basic-title">{{manufacturer.name || 'Manufacturer'}} details</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
   </div>
 
-  <div class="modal-body">
+  <div *ngIf="manufacturer" class="modal-body">
     <p><strong>Name: </strong>{{manufacturer.name}}</p>
     <p><strong>City: </strong>{{manufacturer.city}}</p>
     <p><strong>Country: </strong>{{manufacturer.country}}</p>

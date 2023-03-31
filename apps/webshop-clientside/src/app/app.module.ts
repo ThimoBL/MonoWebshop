@@ -10,7 +10,7 @@ import { ListProductComponent } from './pages/products/list/list.component';
 import { CreateProductComponent } from './pages/products/create/create.component';
 import { DetailsProductComponent } from './pages/products/details/details.component';
 import { UpdateProductComponent } from './pages/products/update/update.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AboutComponent } from './pages/about/about.component';
 import { ManufacturerComponent } from './pages/manufacturer/manufacturer.component';
 import { CreateManufacturerComponent } from './pages/manufacturer/create/create.component';
@@ -27,6 +27,11 @@ import { ReviewComponent } from './pages/review/review.component';
 import { ReviewService } from './services/review/review.service';
 import { OrderService } from './services/order/order.service';
 import { CreateComponent } from './pages/review/create/create.component';
+import { DeleteComponent } from './pages/review/delete/delete.component';
+import { EditComponent } from './pages/review/edit/edit.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import {HttpClientModule} from "@angular/common/http";
+import {JwtHelperService} from "./services/generic/jwtHelper.service";
 
 @NgModule({
   declarations: [
@@ -47,8 +52,18 @@ import { CreateComponent } from './pages/review/create/create.component';
     RegisterComponent,
     ReviewComponent,
     CreateComponent,
+    DeleteComponent,
+    EditComponent,
+    DashboardComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [
     ManufacturerService,
     UserService,
@@ -56,6 +71,7 @@ import { CreateComponent } from './pages/review/create/create.component';
     AuthService,
     ReviewService,
     OrderService,
+    JwtHelperService
   ],
   bootstrap: [AppComponent],
 })

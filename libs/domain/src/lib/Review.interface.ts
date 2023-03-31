@@ -1,10 +1,10 @@
 import {User} from "@mono-webshop/domain";
 
 export interface Review {
-  id: number;
+  _id?: string;
   title: string;
   description: string;
   rating: number;
-  product: number;
-  user: User;
+  product: string;
+  createdBy: User;
 }

@@ -1,31 +1,60 @@
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">{{product.name}} details</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+<div class="card w-75 my-4 mx-auto rounded-0 shadow-lg">
+  <div class="card-header d-flex flex-row">
+    <h4 class="card-title my-auto" id="modal-basic-title">Product details</h4>
+    <button type="button" class="btn-close ms-auto my-auto" aria-label="Close" (click)="ngCardClose()"></button>
   </div>
 
-  <div class="modal-body">
-    <p><strong>Name: </strong>{{product.name}}</p>
-    <p><strong>Description: </strong>{{product.description}}</p>
-    <p><strong>Price: </strong>{{product.price}}</p>
-    <p><strong>Size: </strong>{{product.size}}</p>
-    <div class="bg-black bg-opacity-25 p-3">
-      <review-create productId="{{product.id}}"></review-create>
-      <hr>
-      <div *ngFor="let review of product.reviews">
-        <p><strong>Reviewer: </strong>{{review.title}}</p>
-        <p><strong>Review: </strong>{{review.description}}</p>
-        <p><strong>Rating: </strong>({{review.rating}})
-          <ngb-rating class="stars" [rate]="review.rating" [max]="5" [readonly]="true"></ngb-rating>
-          (5)
-        </p>
-        <hr>
+  <div *ngIf="product" class="card-body">
+    <div class="row">
+      <div class="col-md d-flex flex-row">
+        <img src="{{product.image || 'https://picsum.photos/640/360'}}"
+             class="card-img-top rounded-0 img-responsive mx-auto" alt="...">
+      </div>
+      <div class="col-md d-flex flex-column">
+        <p><strong>Name: </strong>{{product.name}}</p>
+        <p><strong>Description: </strong>{{product.description}}</p>
+        <p><strong>Price: </strong>{{product.price}}</p>
+        <p><strong>Size: </strong>{{product.size}}</p>
+        <div class="d-flex flex-row mt-auto">
+          <button type="button" class="btn btn-outline-success rounded-0 ms-auto">Buy Product</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="bg-black bg-opacity-25 p-3 my-3">
+          <review-create productId="{{product._id}}" [callbackFunction]="myCallbackFunction"></review-create>
+          <hr>
+          <div *ngFor="let review of product.reviews">
+            <div class="d-flex flex-row">
+              <p>
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                  <path
+                    d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+                </svg>
+                {{review.createdBy.firstName}} {{review.createdBy.lastName}}
+              </p>
+              <a *ngIf="(this.authService.userMayEdit(review.createdBy._id) | async)" class="p-2 ms-auto my-auto bg-black bg-opacity-25 rounded-0 text-decoration-none shadow" style="cursor: pointer;"
+                 (click)="OnDelete(review._id!)">
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                  <path
+                    d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/>
+                </svg>
+              </a>
+            </div>
+            <p><strong>{{review.title}}</strong></p>
+            <p><strong>Review: </strong>{{review.description}}</p>
+            <p><strong>Rating: </strong>({{review.rating}})
+              <ngb-rating class="stars" [rate]="review.rating" [max]="5" [readonly]="true"></ngb-rating>
+              (5)
+            </p>
+            <hr>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary px-5" (click)="modal.dismiss()">Close</button>
+  <div class="card-footer d-flex flex-row">
+    <button type="button" class="btn btn-secondary px-5 ms-auto rounded-0" (click)="ngCardClose()">Close</button>
   </div>
-</ng-template>
-
-<a class="btn btn-success px-3" (click)="ngOnModalOpen(content)">Details</a>
+</div>

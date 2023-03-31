@@ -1,9 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Product} from "@mono-webshop/domain";
+import {Product, User} from "@mono-webshop/domain";
 import Swal from "sweetalert2";
 import {ProductService} from "../../../services/product/product.service";
+import {ReviewService} from "../../../services/review/review.service";
+import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
+import {switchMap} from 'rxjs/internal/operators/switchMap';
+import {Observable} from "rxjs";
+import {AuthService} from "../../../services/auth/auth.service";
 
 @Component({
   selector: 'products-details',
@@ -12,39 +17,83 @@ import {ProductService} from "../../../services/product/product.service";
 })
 export class DetailsProductComponent implements OnInit {
 
-  @Input()
-  productId: string | undefined;
-  product: Product = {} as Product;
+  productId: string;
+  product: Product;
+  productEmitter$ = new Observable<Product>;
 
   constructor(
     private modalService: NgbModal,
     private route: ActivatedRoute,
     private router: Router,
-    private productsService: ProductService
+    public authService: AuthService,
+    private productsService: ProductService,
+    private reviewService: ReviewService
   ) {
-    // this is for routerLink on same component when only queryParameter changes
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
+
+    this.productId = this.route.snapshot.paramMap.get('id') ?? '';
   }
 
   ngOnInit(): void {
-    if (!this.productId) return;
+    console.log(this.productId);
 
-    if (!isNaN(Number(this.productId))) {
-      let prodId: number = Number(this.productId);
-
-      this.product = this.productsService.get(prodId);
-    } else {
-      Swal.fire(
-        'Not Found!',
-        'The manufacturer has not been found!',
-        'error'
-      );
-    }
+    this.productsService.get(this.productId).subscribe(
+      (product: Product) => {
+        this.product = product;
+        this.productEmitter$ = this.productsService.get(this.productId);
+      }
+    );
   }
 
-  ngOnModalOpen(content: any): void {
-    this.modalService.open(content);
+  OnDelete(reviewId: string): void {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#dc3545',
+      cancelButtonColor: '#198754',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.reviewService.delete(reviewId).subscribe({
+            next: () => {
+              this.productEmitter$ = this.productsService.get(this.productId);
+            },
+            error: (err) => {
+              console.log(err);
+              Swal.fire(
+                'Error!',
+                'Something went wrong: ' + err.message,
+                'error'
+              );
+            },
+            complete: () => {
+              Swal.fire(
+                'Deleted!',
+                'The manufacturer has been deleted.',
+                'success'
+              );
+
+              this.productsService.get(this.productId).subscribe(
+                (product: Product) => {
+                  this.product = product;
+                }
+              );
+            }
+          }
+        );
+      }
+    })
+  }
+
+  ngCardClose(): void {
+    this.router.navigate(['/products']);
+  }
+
+  myCallbackFunction = (): void => {
+    this.router.navigate(['/products', this.productId]);
   }
 }

@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgbModal, NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
-import {Manufacturer, Product} from "@mono-webshop/domain";
+import {Manufacturer, Product, User} from "@mono-webshop/domain";
 import Swal from 'sweetalert2';
 import {ManufacturerService} from "../../../services/manufacturer/manufacturer.service";
 import {ProductService} from "../../../services/product/product.service";
+import {Router} from "@angular/router";
+import {AuthService} from "../../../services/auth/auth.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'products-create',
@@ -13,32 +16,35 @@ import {ProductService} from "../../../services/product/product.service";
 })
 
 export class CreateProductComponent implements OnInit {
-  selectedManufacturer: string | null;
+  // selectedManufacturer: string | null;
 
   constructor(
+    private router: Router,
     private modalService: NgbModal,
+    private authService: AuthService,
     private productsService: ProductService,
     private manufacturerService: ManufacturerService
-    )
-  {
-    this.selectedManufacturer = null;
+  ) {
+    // this.selectedManufacturer = null;
   }
 
   product: Product = {
-    id: 0,
     name: '',
     description: '',
     price: 0,
     image: '',
     size: '',
-    manufacturer: {} as Manufacturer,
-    reviews: []
+    reviews: [],
+    manufacturer: '',
+    createdBy: ''
   }
 
   manufacturers: Manufacturer[] | undefined;
 
   ngOnInit(): void {
-    this.manufacturers = this.manufacturerService.list();
+    this.manufacturerService.list().subscribe(manufacturers => {
+      this.manufacturers = manufacturers
+    });
   }
 
   ngOnModalOpen(content: any): void {
@@ -50,14 +56,32 @@ export class CreateProductComponent implements OnInit {
   }
 
   OnSubmit(): void {
-    this.productsService.create(this.product);
+    this.authService.getUserId().subscribe(id => this.product.createdBy = id);
+    this.productsService.create(this.product).subscribe({
+      next: (product: Product) => {
+        console.log(product);
+        Swal.fire({
+          title: 'Success!',
+          text: 'Product created successfully!',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        }).then(() => {
+          this.ngOnModalClose();
+          this.router.navigate(['/']);
+        });
+      },
+      error: (err) => {
+        console.error(err);
 
-    this.ngOnModalClose();
-
-    Swal.fire(
-      'Success',
-      'Product successfully created',
-      'success'
-    )
+        Swal.fire(
+          'Error!',
+          'The product could not be created! <br /> Reason: ' + err.message,
+          'error'
+        );
+      },
+      complete: () => {
+        console.log('Product created')
+      }
+    })
   }
 }

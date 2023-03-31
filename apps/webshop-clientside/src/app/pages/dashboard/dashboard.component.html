@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col">
+    <h3>Info</h3>
+    <p>
+      This app is running in <strong>'{{ runningMode }}'</strong> mode. <br />
+      Backend API URL:
+      <a href="{{ apiUrl }}" target="_blank">
+        <strong>'{{ apiUrl }}'</strong></a
+      ><br />
+      Application Name: <strong>'{{ name }}'</strong><br />
+      Version: <strong>{{ version }}</strong><br />
+      Description: <strong>'{{ description }}'</strong><br />
+      Author: <strong>'{{ author }}'</strong>
+    </p>
+    <div *ngIf="loggedInUser.roles">
+      <h3>Roles</h3>
+      <ul>
+        <li *ngFor="let role of loggedInUser.roles">{{ role }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

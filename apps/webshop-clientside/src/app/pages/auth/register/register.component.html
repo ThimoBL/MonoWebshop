@@ -4,7 +4,7 @@
       <h4 class="modal-title" id="modal-basic-title">Register</h4>
     </div>
     <hr>
-    <form #form="ngForm" name="form" (ngSubmit)="OnSubmit()" novalidate>
+    <form #form="ngForm" name="form" (ngSubmit)="OnSubmit(form)" novalidate>
       <div class="modal-body">
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
@@ -105,7 +105,7 @@
       </div>
       <hr>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary px-5">Register</button>
+        <button type="submit" class="btn btn-primary px-5">Register</button>
       </div>
     </form>
   </div>

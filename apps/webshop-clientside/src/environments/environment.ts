@@ -4,6 +4,13 @@
 
 export const environment = {
   production: false,
+
+  SERVER_API_URL: 'http://localhost:3333/api/',
+
+  APP_NAME: 'Webshop',
+  APP_VERSION: '1.0.0',
+  APP_DESCRIPTION: 'Webshop in MonoRepo with Nx',
+  APP_AUTHOR: 'Thimo Luijsterburg - 2184240',
 };
 
 /*

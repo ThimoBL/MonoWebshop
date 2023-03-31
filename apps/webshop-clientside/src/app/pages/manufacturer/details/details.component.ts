@@ -13,27 +13,33 @@ export class DetailsManufacturerComponent implements OnInit {
 
   @Input()
   manufacturerId: string | undefined;
-  manufacturer: Manufacturer = {} as Manufacturer;
+  manufacturer: Manufacturer;
 
   constructor(
     private modalService: NgbModal,
     private manufacturerService: ManufacturerService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     if (!this.manufacturerId) return;
 
-    if (!isNaN(Number(this.manufacturerId))) {
-      let manufacturerId: number = Number(this.manufacturerId);
-
-      this.manufacturer = this.manufacturerService.get(manufacturerId);
-    } else {
-      Swal.fire(
-        'Not Found!',
-        'The manufacturer has not been found!',
-        'error'
-      );
-    }
+    this.manufacturerService.get(this.manufacturerId)
+      .subscribe({
+        next: (manufacturer) => {
+          this.manufacturer = manufacturer;
+        },
+        error: (err) => {
+          Swal.fire(
+            'Error!',
+            'The manufacturer could not be loaded! <br /> Reason: ' + err.message,
+            'error'
+          );
+        },
+        complete: () => {
+          console.log('Manufacturer loaded')
+        }
+    });
   }
 
   ngOnModalOpen(content: any): void {

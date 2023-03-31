@@ -1,11 +1,10 @@
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Add new product!</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+<div class="card rounded-0 w-75 shadow-lg mx-auto">
+  <div class="card-header d-flex flex-row">
+    <h4 class="modal-title" id="modal-basic-title">Edit product!</h4>
+    <button type="button" class="btn-close ms-auto my-auto" aria-label="Close" (click)="ngOnClose()"></button>
   </div>
   <form #form="ngForm" name="form" (ngSubmit)="OnSubmit()" novalidate>
-
-    <div class="modal-body">
+    <div *ngIf="product" class="card-body">
       <div class="mb-3">
         <label for="name" class="form-label">Product Name</label>
         <input
@@ -93,12 +92,31 @@
           </div>
         </div>
       </div>
+      <div class="mb-3">
+        <label for="manufacturer">Manufacturer</label>
+        <select
+          id="manufacturer"
+          name="manufacturer"
+          class="form-select"
+          #manufacturer="ngModel"
+          [(ngModel)]="product.manufacturer"
+          [ngClass]="{'is-invalid': manufacturer.invalid && manufacturer.touched}"
+          required>
+          <option *ngFor="let manufacturer of manufacturers" [selected]="product.manufacturer" [ngValue]="manufacturer._id">
+            {{manufacturer.name}}
+          </option>
+        </select>
+        <div *ngIf="manufacturer.invalid && (manufacturer.dirty || manufacturer.touched)"
+             class="alert alert-danger mt-1 py-1">
+          <div *ngIf="manufacturer.errors?.['required']">
+            Manufacturer is required.
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary px-5" (click)="modal.dismiss()">Cancel</button>
-      <button type="submit" class="btn btn-success px-5" [disabled]="!form.valid">Save</button>
+    <div class="card-footer d-flex flex-row py-3">
+      <button type="button" class="btn btn-secondary px-5 ms-auto mx-1 rounded-0" (click)="ngOnClose()">Cancel</button>
+      <button type="submit" class="btn btn-success px-5 ms-2 rounded-0" [disabled]="!form.valid">Save</button>
     </div>
   </form>
-</ng-template>
-
-<a class="btn btn-warning px-3" (click)="ngOnModalOpen(content)">Edit</a>
+</div>

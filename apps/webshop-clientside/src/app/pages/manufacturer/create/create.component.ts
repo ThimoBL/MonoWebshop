@@ -4,6 +4,7 @@ import {Manufacturer} from "@mono-webshop/domain";
 import Swal from "sweetalert2";
 import {Router} from "@angular/router";
 import {ManufacturerService} from "../../../services/manufacturer/manufacturer.service";
+import {AuthService} from "../../../services/auth/auth.service";
 
 @Component({
   selector: 'manufacturer-create',
@@ -14,17 +15,19 @@ export class CreateManufacturerComponent implements OnInit {
   constructor(
     private router: Router,
     private modalService: NgbModal,
+    public authService: AuthService,
     private manufacturerService: ManufacturerService
   ) {
   }
 
   manufacturer: Manufacturer = {
-    id: 0,
     name: '',
     city: '',
     country: '',
     email: '',
-    phone: ''
+    phone: '',
+    products: [],
+    createdBy: ''
   };
 
   ngOnInit(): void {
@@ -39,9 +42,32 @@ export class CreateManufacturerComponent implements OnInit {
   }
 
   OnSubmit(): void {
-    this.manufacturerService.create(this.manufacturer);
+    this.authService.getUserId().subscribe(id => this.manufacturer.createdBy = id);
 
-    this.ngOnModalClose();
+    this.manufacturerService.create(this.manufacturer).subscribe({
+      next: (manufacturer: Manufacturer) => {
+        console.log(manufacturer);
+
+        Swal.fire({
+          title: 'Success!',
+          text: 'Manufacturer is created.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        })
+
+        this.ngOnModalClose();
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        Swal.fire({
+          title: 'Error!',
+          text: err.message,
+          icon: 'error',
+          confirmButtonText: 'OK'
+        })
+      }
+    });
+
 
     Swal.fire(
       'Success',

@@ -1,11 +1,11 @@
 import {Product, User} from "@mono-webshop/domain";
 
 export interface Order {
-  id: number;
+  _id: string;
   orderDate: Date;
   orderNumber: string;
   Status: string;
   Total: number;
-  user: User;
+  createdBy: string;
   orderItems: Product[];
 }

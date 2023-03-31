@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthService} from "../../../services/auth/auth.service";
+import {LoginForm, User} from "@mono-webshop/domain";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'mono-webshop-login',
@@ -8,8 +10,12 @@ import {AuthService} from "../../../services/auth/auth.service";
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  email: string | null = null;
-  password: string | null = null;
+  login: LoginForm = {
+    username: '',
+    password: ''
+  };
+
+  subs: Subscription;
 
   constructor(
     private readonly authService: AuthService,
@@ -21,12 +27,24 @@ export class LoginComponent implements OnInit {
   }
 
   OnSubmit(): void {
-    this.authService.loginUser(this.email ?? '', this.password ?? '')
-      .then((user) => {
-        if (user) {
-          console.log('Login successful');
+    this.subs = this.authService.loginUser(this.login)
+      .subscribe({
+        next: (user: User) => {
+          console.log(user);
+        },
+        error: (error) => {
+          console.log('error:', error);
+        },
+        complete: () => {
+          console.log('complete');
           this.router.navigate(['/']);
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subs) {
+      this.subs.unsubscribe();
+    }
   }
 }

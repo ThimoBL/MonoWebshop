@@ -1,7 +1,8 @@
+<products-create *ngIf="(this.authService.userInRole('admin') | async)"></products-create>
 <div class="row">
-  <div class="col-lg col-md-6 col-sm-6" *ngFor="let product of Products">
+  <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6" *ngFor="let product of Products">
     <div class="card rounded-0 my-2">
-      <img src="{{product.image}}" class="card-img-top rounded-0 img-responsive" alt="...">
+      <img src="{{product.image || 'https://picsum.photos/640/360'}}" class="card-img-top rounded-0 img-responsive" alt="...">
       <div class="card-body">
         <div class="d-flex flex-row">
           <h5 class="card-title me-auto">{{product.name}}</h5>
@@ -12,12 +13,12 @@
         <p class="card-text">
           <ngb-rating class="stars" [rate]="avgRating(product.reviews)" [max]="5" [readonly]="true"></ngb-rating>
           <br>
-          Rating: {{avgRating(product.reviews) | number:'1.1-1'}} ({{product.reviews.length}})
+          Rating: {{avgRating(product.reviews) | number:'1.1-1'}} ({{product.reviews ? product.reviews.length : 0}})
         </p>
         <div class="d-flex flex-row">
-          <products-details productId="{{product.id}}" class="me-auto"></products-details>
-          <products-update productId="{{product.id}}" class="mx-auto"></products-update>
-          <a class="btn btn-danger ms-auto px-3" (click)="OnDelete(product.id)">Delete</a>
+          <a routerLink="{{product._id}}" class="btn btn-success px-3 me-auto rounded-0">Details</a>
+          <a *ngIf="(this.authService.userInRole('admin') | async) && (this.authService.userMayEdit(product.createdBy) | async)" routerLink="{{product._id}}/edit" class="btn btn-warning px-3 mx-auto rounded-0">Edit</a>
+          <a *ngIf="(this.authService.userInRole('admin') | async) && (this.authService.userMayEdit(product.createdBy) | async)" class="btn btn-danger ms-auto px-3 rounded-0" (click)="OnDelete(product._id!)">Delete</a>
         </div>
       </div>
     </div>

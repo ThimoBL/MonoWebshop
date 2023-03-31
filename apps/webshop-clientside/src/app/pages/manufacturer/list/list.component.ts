@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Swal from "sweetalert2";
 import {Manufacturer} from "@mono-webshop/domain";
 import {ManufacturerService} from "../../../services/manufacturer/manufacturer.service";
+import {AuthService} from "../../../services/auth/auth.service";
 
 
 @Component({
@@ -10,17 +11,20 @@ import {ManufacturerService} from "../../../services/manufacturer/manufacturer.s
   styleUrls: ['./list.component.css', '../manufacturer.component.css'],
 })
 export class ListManufacturerComponent implements OnInit {
-  Manufacturers: Manufacturer[] | undefined;
+  Manufacturers: Manufacturer[];
 
   constructor(
+    public authService: AuthService,
     private manufacturerService: ManufacturerService
   ) {}
 
   ngOnInit(): void {
-    this.Manufacturers = this.manufacturerService.list();
+    this.manufacturerService.list().subscribe(manufacturers => {
+      this.Manufacturers = manufacturers
+    });
   }
 
-  OnDelete(id: number) {
+  OnDelete(id: string) {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -31,13 +35,26 @@ export class ListManufacturerComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.manufacturerService.delete(id);
 
-        Swal.fire(
-          'Deleted!',
-          'The manufacturer has been deleted.',
-          'success'
-        )
+        this.manufacturerService.delete(id).subscribe({
+          next: () => {
+            this.Manufacturers = this.Manufacturers.filter(manufacturer => manufacturer._id !== id);
+          },
+          error: (err) => {
+            Swal.fire(
+              'Error!',
+              'Something went wrong! <br /> Reason: ' + err.message,
+              'error'
+            )
+          },
+          complete: () => {
+            Swal.fire(
+              'Deleted!',
+              'Your manufacturer has been deleted.',
+              'success'
+            )
+          }
+        });
       }
     })
   }

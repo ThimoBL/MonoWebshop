@@ -102,14 +102,13 @@
           name="manufacturer"
           class="form-select"
           #manufacturer="ngModel"
-          [(ngModel)]="selectedManufacturer"
+          [(ngModel)]="product.manufacturer"
           [ngClass]="{'is-invalid': manufacturer.invalid && manufacturer.touched}"
           required>
           <option [ngValue]="null">Select manufacturer</option>
-          <option
-            *ngFor="let manufacturer of manufacturers"
-            [ngValue]="manufacturer.id">
+          <option *ngFor="let manufacturer of manufacturers" [ngValue]="manufacturer._id">
             {{manufacturer.name}}
+          </option>
         </select>
         <div *ngIf="manufacturer.invalid && (manufacturer.dirty || manufacturer.touched)"
              class="alert alert-danger mt-1 py-1">
