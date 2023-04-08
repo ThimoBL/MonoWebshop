@@ -17,7 +17,6 @@ export class GenericService<T> {
 
   public list(options?: any): Observable<T[]> {
     const endpoint = this.url + this.endpoint;
-    console.log(`list ${endpoint}`);
     return this.httpClient.get<T[]>(endpoint, {headers: this.headers, ...options})
       .pipe(
         map((response: any) => response.result),
@@ -27,7 +26,6 @@ export class GenericService<T> {
 
   public get(id: string, options?: any): Observable<T> {
     const endpoint = this.url + this.endpoint + '/' + id;
-    console.log(`get ${endpoint}`);
     return this.httpClient.get<T>(endpoint,  {headers: this.headers, ...options})
       .pipe(
         map((response: any) => response.result),
@@ -37,7 +35,6 @@ export class GenericService<T> {
 
   public create(item: T, options?: any): Observable<T> {
     const endpoint = this.url + this.endpoint;
-    console.log(`create ${endpoint}`);
     return this.httpClient.post<T>(endpoint, item, {headers: this.headers, ...options})
       .pipe(
         map((response: any) => response.result),
@@ -47,7 +44,6 @@ export class GenericService<T> {
 
   public update(id: string, item: T, options?: any): Observable<T> {
     const endpoint = this.url + this.endpoint + '/' + id;
-    console.log(`update ${endpoint}`);
     return this.httpClient.put<T>(endpoint, item, {headers: this.headers, ...options})
       .pipe(
         map((response: any) => response.result),
@@ -57,7 +53,6 @@ export class GenericService<T> {
 
   public delete(id: string, options?: any): Observable<T> {
     const endpoint = this.url + this.endpoint + '/' + id;
-    console.log(`delete ${endpoint}`);
     return this.httpClient.delete<T>(endpoint, {headers: this.headers, ...options})
       .pipe(
         map((response: any) => response),
