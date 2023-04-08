@@ -5,7 +5,8 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "npm run build_backend": "nx build webshop-api --prod"
   },
   "private": true,
   "devDependencies": {
