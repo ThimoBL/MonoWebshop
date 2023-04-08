@@ -53,7 +53,7 @@ jobs:
       run: npm install -g nx
 
     - name: Run clientside tests
-      run: nx run webshop-clientside:test:production
+      run: nx run webshop-clientside:test
 
     - name: Run api tests
-      run: nx run webshop-api:test:production
+      run: nx run webshop-api:test
