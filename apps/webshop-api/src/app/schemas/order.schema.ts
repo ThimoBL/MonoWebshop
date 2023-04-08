@@ -1,6 +1,6 @@
 import {Prop, SchemaFactory} from "@nestjs/mongoose";
 import {v4 as uuid} from 'uuid';
-import {Document} from "mongoose";
+import {Document, Schema as MongooseSchema} from "mongoose";
 import { Product } from "./product.schema";
 
 export type OrderDocument = Order & Document;
@@ -36,10 +36,10 @@ export class Order {
   createdBy: string;
 
   @Prop({
-    required: true,
+    required: false,
     default: [],
   })
-  orderItems: Product[]
+  orderItems: Product
 }
 
 export const OrderSchema = SchemaFactory.createForClass(Order);

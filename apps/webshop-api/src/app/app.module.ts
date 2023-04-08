@@ -1,49 +1,55 @@
-import { Module } from '@nestjs/common';
+import {Module} from '@nestjs/common';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { ManufacturerController } from './manufacturer/manufacturer.controller';
-import { ProductController } from './product/product.controller';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
-import { ManufacturerService } from './manufacturer/manufacturer.service';
-import { ReviewService } from './review/review.service';
-import { ReviewController } from './review/review.controller';
-import { MongooseModule } from '@nestjs/mongoose';
-import { ProductService } from './product/product.service';
-import { ManufacturerSchema } from './schemas/manufacturer.schema';
-import { UserSchema } from './schemas/user.schema';
-import { OrderService } from './order/order.service';
-import { OrderController } from './order/order.controller';
-import { OrderModule } from './order/order.module';
+import {AppController} from './app.controller';
+import {AppService} from './app.service';
+import {ManufacturerController} from './manufacturer/manufacturer.controller';
+import {ProductController} from './product/product.controller';
+import {UsersModule} from './users/users.module';
+import {AuthModule} from './auth/auth.module';
+import {ManufacturerService} from './manufacturer/manufacturer.service';
+import {ReviewService} from './review/review.service';
+import {ReviewController} from './review/review.controller';
+import {MongooseModule} from '@nestjs/mongoose';
+import {ProductService} from './product/product.service';
+import {ManufacturerSchema} from './schemas/manufacturer.schema';
+import {UserSchema} from './schemas/user.schema';
+import {OrderService} from './order/order.service';
+import {OrderController} from './order/order.controller';
+import {OrderModule} from './order/order.module';
+import {Neo4jScheme} from "nest-neo4j/dist";
+import {Neo4jModule} from "nest-neo4j";
+import {environment} from "../environments/environment";
+import {ProductModule} from "./product/product.module";
+import {ManufacturerModule} from "./manufacturer/manufacturer.module";
+import {ReviewModule} from "./review/review.module";
 
 @Module({
   imports: [
     MongooseModule.forRoot(
-      'mongodb://127.0.0.1:27017/mono-webshop'
-      // `mongodb+srv://${process.env.MONGO_USR}:${process.env.MONGO_PWD}@${process.env.MONGO_HOST}/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`
+      `mongodb://${environment.MONGO_URL}:${environment.MONGO_PORT}/${environment.MONGO_DB}`,
+      // `mongodb+srv://${environment.MONGO_USR}:${environment.MONGO_PWD}@${environment.MONGO_HOST}/${environment.MONGO_DATABASE}?retryWrites=true&w=majority`
     ),
+    Neo4jModule.forRoot({
+      scheme: environment.NEO4J_URI as Neo4jScheme,
+      host: environment.NEO4J_HOST,
+      port: environment.NEO4J_PORT,
+      username: environment.NEO4J_USERNAME,
+      password: environment.NEO4J_PASSWORD,
+    }),
     MongooseModule.forFeature([
-      { name: 'Manufacturer', schema: ManufacturerSchema },
+      {name: 'User', schema: UserSchema},
+      {name: 'Manufacturer', schema: ManufacturerSchema},
     ]),
-    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
     AuthModule,
     UsersModule,
-    OrderModule,
+    ManufacturerModule,
   ],
   controllers: [
     AppController,
-    ProductController,
-    ManufacturerController,
-    ReviewController,
-    OrderController,
   ],
   providers: [
     AppService,
-    ProductService,
-    ManufacturerService,
-    ReviewService,
-    OrderService,
   ],
 })
-export class AppModule {}
+export class AppModule {
+}

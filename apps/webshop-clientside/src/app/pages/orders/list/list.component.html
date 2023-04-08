@@ -1,0 +1,38 @@
+<h1>Orders</h1>
+<div *ngIf="!Orders || Orders.length === 0; else orderView">
+  <p>Er zijn geen orders gevonden.</p>
+</div>
+<ng-template #orderView>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Order Number</th>
+        <th scope="col">Order Date</th>
+        <th scope="col">Status</th>
+        <th scope="col">Total</th>
+        <th scope="col">Created By</th>
+        <th scope="col">Order Items</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let order of Orders; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ order.orderNumber }}</td>
+        <td>{{ order.orderDate | date }}</td>
+        <td>{{ order.status }}</td>
+        <td>{{ order.total | currency }}</td>
+        <td>{{ order.createdBy }}</td>
+        <td>
+          <ul>
+            <li>
+              {{ order.orderItems.name }} - {{ order.orderItems.price | currency }}
+            </li>
+          </ul>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>

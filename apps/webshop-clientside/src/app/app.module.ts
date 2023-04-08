@@ -30,8 +30,11 @@ import { CreateComponent } from './pages/review/create/create.component';
 import { DeleteComponent } from './pages/review/delete/delete.component';
 import { EditComponent } from './pages/review/edit/edit.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import {HttpClientModule} from "@angular/common/http";
-import {JwtHelperService} from "./services/generic/jwtHelper.service";
+import { HttpClientModule } from '@angular/common/http';
+import { JwtHelperService } from './services/generic/jwtHelper.service';
+import { ListOrdersComponent } from './pages/orders/list/list.component';
+import { DetailsOrdersComponent } from './pages/orders/details/details.component';
+import { OrdersComponent } from './pages/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +58,9 @@ import {JwtHelperService} from "./services/generic/jwtHelper.service";
     DeleteComponent,
     EditComponent,
     DashboardComponent,
+    ListOrdersComponent,
+    DetailsOrdersComponent,
+    OrdersComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +77,7 @@ import {JwtHelperService} from "./services/generic/jwtHelper.service";
     AuthService,
     ReviewService,
     OrderService,
-    JwtHelperService
+    JwtHelperService,
   ],
   bootstrap: [AppComponent],
 })

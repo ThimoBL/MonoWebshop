@@ -17,7 +17,7 @@ export class ApiResponseInterceptor implements NestInterceptor {
             return {
               result: data,
               info: {
-                status: 200,
+                status: context.switchToHttp().getResponse().statusCode,
                 message: 'OK',
                 count: data instanceof Array ? data.length : 1,
               }

@@ -46,6 +46,14 @@
             >
               User Profile
             </button>
+            <button
+              ngbDropdownItem
+              routerLink="/orders"
+              [routerLinkActive]="['active']"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              Orders
+            </button>
           </div>
         </li>
         <li class="nav-item">

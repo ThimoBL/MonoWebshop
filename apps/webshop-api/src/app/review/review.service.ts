@@ -2,14 +2,12 @@ import {Injectable, Logger} from '@nestjs/common';
 import {Manufacturer, Product, Review, User} from "@mono-webshop/domain";
 import {InjectConnection, InjectModel} from "@nestjs/mongoose";
 import mongoose, {Model} from "mongoose";
-import {ReviewSchema} from "../schemas/review.schema";
 
 @Injectable()
 export class ReviewService {
   constructor(
     @InjectModel('Manufacturer') private manufacturerModel: Model<Manufacturer>,
     @InjectModel('User') private userModel: Model<User>,
-    @InjectConnection() private readonly connection: mongoose.Connection
   ) {
   }
 

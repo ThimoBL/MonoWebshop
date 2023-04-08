@@ -2,14 +2,14 @@
   <div class="col">
     <h3>Info</h3>
     <p>
-      This app is running in <strong>'{{ runningMode }}'</strong> mode. <br />
+      This app is running in <strong>'{{ runningMode }}'</strong> mode. <br/>
       Backend API URL:
       <a href="{{ apiUrl }}" target="_blank">
         <strong>'{{ apiUrl }}'</strong></a
-      ><br />
-      Application Name: <strong>'{{ name }}'</strong><br />
-      Version: <strong>{{ version }}</strong><br />
-      Description: <strong>'{{ description }}'</strong><br />
+      ><br/>
+      Application Name: <strong>'{{ name }}'</strong><br/>
+      Version: <strong>{{ version }}</strong><br/>
+      Description: <strong>'{{ description }}'</strong><br/>
       Author: <strong>'{{ author }}'</strong>
     </p>
     <div *ngIf="loggedInUser.roles">
@@ -17,6 +17,24 @@
       <ul>
         <li *ngFor="let role of loggedInUser.roles">{{ role }}</li>
       </ul>
+    </div>
+  </div>
+  <div class="col" *ngIf="this.authService.isLoggedIn() | async">
+    <h3>Recommended Product</h3>
+    <div class="card rounded-0 my-2" *ngIf="recommendedProd">
+      <img src="{{recommendedProd.image || 'https://picsum.photos/640/360'}}"
+           class="card-img-top rounded-0 img-responsive" alt="...">
+      <div class="card-body">
+        <div class="d-flex flex-row">
+          <h5 class="card-title me-auto">{{recommendedProd.name}}</h5>
+          <h5 class="card-title ms-auto">€ {{recommendedProd.price}}</h5>
+        </div>
+        <p class="card-text">{{recommendedProd.description}}</p>
+        <p class="card-text">Size: {{recommendedProd.size}}</p>
+        <div class="d-flex flex-row">
+          <a routerLink="/products/{{recommendedProd._id}}" class="btn btn-success px-3 me-auto rounded-0">Details</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

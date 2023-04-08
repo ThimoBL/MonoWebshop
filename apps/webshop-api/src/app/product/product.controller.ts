@@ -18,6 +18,13 @@ export class ProductController {
     return this.productService.list();
   }
 
+  @Get('recommended')
+  @UseGuards(JwtAuthGuard)
+  getRecommendedProduct() {
+    Logger.log(`get recommended product`);
+    return this.productService.recommended();
+  }
+
   @Get(':id')
   getProduct(@Param('id') id: string) {
     Logger.log(`get product ${id}`);

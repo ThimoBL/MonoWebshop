@@ -8,7 +8,6 @@ import {catchError, map, Observable} from "rxjs";
 
 @Injectable({providedIn: 'root'})
 export class ReviewService extends GenericService<Review>{
-
   private readonly customHeader = new HttpHeaders({
     'Content-Type': 'application/json',
     'Authorization': 'Bearer ' + localStorage.getItem('access_token')

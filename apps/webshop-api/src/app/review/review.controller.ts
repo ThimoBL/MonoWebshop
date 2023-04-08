@@ -1,6 +1,5 @@
 import {Body, Controller, Delete, Get, Logger, Param, Post, Put, UseGuards} from '@nestjs/common';
-import {HasRoles} from "../auth/has-roles.decorator";
-import {Manufacturer, Review, Role} from "@mono-webshop/domain";
+import {Review} from "@mono-webshop/domain";
 import {JwtAuthGuard} from "../auth/jwt-auth.guard";
 import {RolesGuard} from "../auth/roles.guard";
 import {ReviewService} from "./review.service";

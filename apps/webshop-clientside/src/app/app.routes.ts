@@ -12,21 +12,32 @@ import {RegisterComponent} from "./pages/auth/register/register.component";
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {ListProductComponent} from "./pages/products/list/list.component";
 import {ListManufacturerComponent} from "./pages/manufacturer/list/list.component";
+import {OrdersComponent} from "./pages/orders/orders.component";
+import {ListOrdersComponent} from "./pages/orders/list/list.component";
+import {DetailsOrdersComponent} from "./pages/orders/details/details.component";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', component: DashboardComponent},
-  {path: 'products', component: ProductsComponent, children: [
+  {
+    path: 'products', component: ProductsComponent, children: [
       {path: '', pathMatch: 'full', component: ListProductComponent},
       {path: ':id', pathMatch: 'full', component: DetailsProductComponent},
       {path: ':id/edit', pathMatch: 'full', component: UpdateProductComponent},
       {path: 'create', redirectTo: '', pathMatch: 'full'},
-    ]},
+    ]
+  },
   {
     path: 'manufacturers', component: ManufacturerComponent, children: [
       {path: '', pathMatch: 'full', component: ListManufacturerComponent},
       {path: ':id', pathMatch: 'full', component: DetailsManufacturerComponent},
       {path: ':id/edit', pathMatch: 'full', component: UpdateManufacturerComponent},
       {path: 'create', redirectTo: '', pathMatch: 'full'},
+    ]
+  },
+  {
+    path: 'orders', component: OrdersComponent, children: [
+      {path: '', pathMatch: 'full', component: ListOrdersComponent},
+      {path: ':id', pathMatch: 'full', component: DetailsOrdersComponent},
     ]
   },
   {path: 'about', pathMatch: 'full', component: AboutComponent},

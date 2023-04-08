@@ -1,14 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Product, User} from "@mono-webshop/domain";
+import {Order, Product, User} from "@mono-webshop/domain";
 import Swal from "sweetalert2";
 import {ProductService} from "../../../services/product/product.service";
 import {ReviewService} from "../../../services/review/review.service";
 import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
 import {switchMap} from 'rxjs/internal/operators/switchMap';
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
 import {AuthService} from "../../../services/auth/auth.service";
+import {OrderService} from "../../../services/order/order.service";
 
 @Component({
   selector: 'products-details',
@@ -27,7 +28,8 @@ export class DetailsProductComponent implements OnInit {
     private router: Router,
     public authService: AuthService,
     private productsService: ProductService,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    private orderService: OrderService,
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
@@ -95,5 +97,62 @@ export class DetailsProductComponent implements OnInit {
 
   myCallbackFunction = (): void => {
     this.router.navigate(['/products', this.productId]);
+  }
+
+  buyProduct(): void {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#198754',
+      cancelButtonColor: '#dc3545',
+      confirmButtonText: 'Yes, buy it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+          let userId = '';
+
+          this.authService.getUserId().subscribe(id => userId = id);
+
+          let order: Order = {
+            orderDate: new Date(),
+            orderNumber: (Math.random() * 1000000).toString(),
+            status: 'pending',
+            total: 1,
+            createdBy: userId,
+            orderItems: this.product
+          }
+
+
+          this.orderService.create(order).subscribe({
+              next: () => {
+                this.productEmitter$ = this.productsService.get(this.productId);
+              },
+              error: (err) => {
+                console.log(err);
+                Swal.fire(
+                  'Error!',
+                  'Something went wrong: ' + err.message,
+                  'error'
+                );
+              },
+              complete: () => {
+                Swal.fire(
+                  'Bought!',
+                  'The product has been bought.',
+                  'success'
+                );
+
+                this.productsService.get(this.productId).subscribe(
+                  (product: Product) => {
+                    this.product = product;
+                  }
+                );
+              }
+            }
+          );
+        }
+      }
+    )
   }
 }

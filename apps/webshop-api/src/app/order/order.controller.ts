@@ -12,21 +12,35 @@ export class OrderController {
   ) {
   }
 
+  @Get('test')
+  test() {
+    return 'test';
+  }
+
   @Get()
+  @HasRoles(Role.Admin)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   getOrders() {
     Logger.log(`get orders`);
     return this.orderService.list();
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
   getOrder(@Param('id') id: string) {
     Logger.log(`get order ${id}`);
     return this.orderService.get(id);
   }
 
+  @Get('user/:id')
+  @UseGuards(JwtAuthGuard)
+  getOrdersByUser(@Param('id') id: string) {
+    Logger.log(`get orders by user ${id}`);
+    return this.orderService.listByUser(id);
+  }
+
   @Post()
-  @HasRoles(Role.Admin)
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  @UseGuards(JwtAuthGuard)
   createOrder(@Body() order: Order) {
     Logger.log(`create order ${order.orderNumber}`);
     return this.orderService.create(order);
