@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
 
-  SERVER_API_URL: 'https://monowebshop-production.up.railway.app/',
+  SERVER_API_URL: 'https://monowebshop-production.up.railway.app/api/',
 
   APP_NAME: 'Webshop',
   APP_VERSION: '1.0.0',
