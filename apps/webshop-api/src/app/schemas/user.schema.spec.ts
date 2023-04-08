@@ -4,7 +4,7 @@ import {disconnect, Model} from "mongoose";
 import {User, UserSchema, UserDocument} from "./user.schema";
 import {getModelToken, MongooseModule} from "@nestjs/mongoose";
 
-describe('Manufacturer Schema', () => {
+describe('User Schema', () => {
   let mongod: MongoMemoryServer;
   let userModel: Model<UserDocument>;
 
