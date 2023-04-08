@@ -78,8 +78,8 @@ describe('(e2e) Webshop API', () => {
   });
 
   beforeEach(async () => {
-    await mongoc.db('test').collection('manufacturers').deleteMany({});
-    await mongoc.db('test').collection('users').deleteMany({});
+    await mongoc.db(environment.DB_NAME).collection('manufacturers').deleteMany({});
+    await mongoc.db(environment.DB_NAME).collection('users').deleteMany({});
   });
 
   afterAll(async () => {

@@ -2,6 +2,7 @@ export const environment = {
   production: false,
 
   DB_CONNECTION_STRING: `mongodb://127.0.0.1:27017/mono-webshop`,
+  DB_NAME: 'mono-webshop',
 
   NEO4J_USERNAME: 'neo4j',
   NEO4J_PASSWORD: 'password!',
