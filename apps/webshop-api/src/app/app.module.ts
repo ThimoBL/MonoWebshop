@@ -26,8 +26,7 @@ import {ReviewModule} from "./review/review.module";
 @Module({
   imports: [
     MongooseModule.forRoot(
-      `mongodb://${environment.MONGO_URL}:${environment.MONGO_PORT}/${environment.MONGO_DB}`,
-      // `mongodb+srv://${environment.MONGO_USR}:${environment.MONGO_PWD}@${environment.MONGO_HOST}/${environment.MONGO_DATABASE}?retryWrites=true&w=majority`
+      environment.DB_CONNECTION_STRING,
     ),
     Neo4jModule.forRoot({
       scheme: environment.NEO4J_URI as Neo4jScheme,
