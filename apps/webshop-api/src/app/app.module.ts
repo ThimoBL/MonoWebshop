@@ -26,7 +26,11 @@ import {ReviewModule} from "./review/review.module";
 @Module({
   imports: [
     MongooseModule.forRoot(
-      'mongodb+srv://admin:PassWord123@mono-webshop-cluster.e1hdvea.mongodb.net/test',
+      environment.DB_CONNECTION_STRING,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
     ),
     Neo4jModule.forRoot({
       scheme: environment.NEO4J_URI as Neo4jScheme,
