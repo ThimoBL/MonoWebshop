@@ -37,7 +37,7 @@ export class ManufacturerController {
   @Put(':id')
   updateManufacturer(@Param('id') id: string, @Body() manufacturer: Manufacturer) {
     Logger.log(`update manufacturer ${id}`);
-    return this.manufacturerService.update(Number(id), manufacturer);
+    return this.manufacturerService.update(id, manufacturer);
   }
 
   @HasRoles(Role.Admin)
@@ -45,6 +45,6 @@ export class ManufacturerController {
   @Delete(':id')
   deleteManufacturer(@Param('id') id: string) {
     Logger.log(`delete manufacturer ${id}`);
-    return this.manufacturerService.delete(Number(id));
+    return this.manufacturerService.delete(id);
   }
 }

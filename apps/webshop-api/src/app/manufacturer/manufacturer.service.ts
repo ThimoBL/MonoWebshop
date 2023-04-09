@@ -35,7 +35,7 @@ export class ManufacturerService {
     return createdManufacturer.save();
   }
 
-  async update(id: number, manufacturer: Manufacturer): Promise<Manufacturer> {
+  async update(id: string, manufacturer: Manufacturer): Promise<Manufacturer> {
     return this.manufacturerModel.findOneAndUpdate<Manufacturer>(
       {_id: id},
       {
@@ -51,7 +51,7 @@ export class ManufacturerService {
     )
   }
 
-  async delete(id: number): Promise<boolean> {
+  async delete(id: string): Promise<boolean> {
     return this.manufacturerModel.deleteOne({_id: id})
       .then(() => Promise.resolve(true));
   }
