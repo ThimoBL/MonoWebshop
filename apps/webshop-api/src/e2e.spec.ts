@@ -48,8 +48,7 @@ let uri: string;
     AppController,
   ],
   providers: [
-    AppService,
-    Neo4jModule
+    AppService
   ],
 })
 class TestAppModule {
