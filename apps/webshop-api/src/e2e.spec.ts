@@ -10,7 +10,6 @@ import {INestApplication, Logger, Module} from '@nestjs/common';
 import {AuthModule} from './app/auth/auth.module';
 
 import {UsersModule} from "./app/users/users.module";
-import {OrderModule} from "./app/order/order.module";
 import {Neo4jModule, Neo4jScheme} from "nest-neo4j/dist";
 import {ApiResponseInterceptor} from "./app/interceptors/api-response.interceptor";
 import {ManufacturerModule} from "./app/manufacturer/manufacturer.module";
@@ -50,6 +49,7 @@ let uri: string;
   ],
   providers: [
     AppService,
+    Neo4jModule
   ],
 })
 class TestAppModule {
