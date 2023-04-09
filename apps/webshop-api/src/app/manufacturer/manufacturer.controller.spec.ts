@@ -30,6 +30,10 @@ describe('ManufacturerController', () => {
     jest.clearAllMocks();
   });
 
+  it('should be defined', () => {
+    expect(manufacturerController).toBeDefined();
+  });
+
   describe('getManufacturers', () => {
     it('should return an array of manufacturers', async () => {
       const getManufacturers = jest.spyOn(manufacturerService, 'list')
