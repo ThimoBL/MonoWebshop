@@ -10,7 +10,7 @@ import {INestApplication, Logger, Module} from '@nestjs/common';
 import {AuthModule} from './app/auth/auth.module';
 
 import {UsersModule} from "./app/users/users.module";
-import {Neo4jModule, Neo4jScheme} from "nest-neo4j/dist";
+import {Neo4jModule, Neo4jScheme} from "nest-neo4j";
 import {ApiResponseInterceptor} from "./app/interceptors/api-response.interceptor";
 import {ManufacturerModule} from "./app/manufacturer/manufacturer.module";
 import {AppController} from "./app/app.controller";
