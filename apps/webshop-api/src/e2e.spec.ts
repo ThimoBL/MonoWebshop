@@ -10,7 +10,7 @@ import {INestApplication, Logger, Module} from '@nestjs/common';
 import {AuthModule} from './app/auth/auth.module';
 
 import {UsersModule} from "./app/users/users.module";
-import {Neo4jModule, Neo4jScheme} from "nest-neo4j";
+import {Neo4jModule, Neo4jScheme, Neo4jService} from "nest-neo4j";
 import {ApiResponseInterceptor} from "./app/interceptors/api-response.interceptor";
 import {ManufacturerModule} from "./app/manufacturer/manufacturer.module";
 import {AppController} from "./app/app.controller";
@@ -29,16 +29,12 @@ let uri: string;
         return {uri};
       },
     }),
-    Neo4jModule.forRootAsync({
-      useFactory: async () => {
-        return {
-          scheme: environment.NEO4J_URI as Neo4jScheme,
-          host: environment.NEO4J_HOST,
-          port: environment.NEO4J_PORT,
-          username: environment.NEO4J_USERNAME,
-          password: environment.NEO4J_PASSWORD,
-        };
-      },
+    Neo4jModule.forRoot({
+      scheme: environment.NEO4J_URI as Neo4jScheme,
+      host: environment.NEO4J_HOST,
+      port: environment.NEO4J_PORT,
+      username: environment.NEO4J_USERNAME,
+      password: environment.NEO4J_PASSWORD,
     }),
     AuthModule,
     UsersModule,
